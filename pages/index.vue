@@ -310,7 +310,7 @@
 			</template>
 
 			<template #step5>
-				<p class="form-step-heading">Souhrn údajů</p>
+				<p class="form-step-heading">Souhrn vyplněných údajů</p>
 				<div class="form-data">
 					<div class="form-data__item text-white">
 						<div class="summary-item">
@@ -580,7 +580,7 @@ const submitForm = async () => {
 	@apply mb-5 text-center text-white text-lg;
 }
 .form-input-label {
-	@apply font-semibold text-white px-1;
+	@apply text-sm font-semibold text-white px-1;
 }
 .form-input {
 	@apply w-full px-2 py-2 rounded-lg border-2 bg-transparent text-white border-indigo-500 outline-none focus:border-white;
@@ -598,9 +598,9 @@ const submitForm = async () => {
 	@apply block text-xs text-red-500 pl-1;
 }
 .summary-item__heading {
-	@font-semibold;
+	@apply text-sm font-semibold px-1;
 }
 .summary-item .summary-item__value {
-	@apply border-solid border-2 border-indigo-500 rounded-md p-3 mb-2;
+	@apply border-solid border-2 border-indigo-500 rounded-md p-3 mb-4;
 }
 </style>

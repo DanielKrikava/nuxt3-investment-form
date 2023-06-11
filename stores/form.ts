@@ -86,8 +86,9 @@ export const useFormStore = defineStore('form', () => {
             activeStepIndex.value--;
         }
         // Hide summary when coming back to edit previous form data
-        if (showSummary) {
+        if (showSummary.value) {
             showSummary.value = false
+            activeStepIndex.value = 4
         }
     };
 

@@ -3,7 +3,10 @@
 		@submit.prevent="$emit('submitForm')"
 		class="max-w-xl mx-auto border-solid border-2 border-indigo-500 rounded-md p-5 sm:p-10"
 	>
-		<p class="text-center font-semibold text-white">
+		<p
+			class="text-center font-semibold text-white"
+			v-if="!getShowSummaryValue"
+		>
 			Krok {{ getActiveStepIndex }}/{{ totalSteps }}
 		</p>
 
