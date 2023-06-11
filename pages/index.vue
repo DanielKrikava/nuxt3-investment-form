@@ -583,7 +583,7 @@ const submitForm = async () => {
 	@apply font-semibold text-white px-1;
 }
 .form-input {
-	@apply w-full px-2 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500;
+	@apply w-full px-2 py-2 rounded-lg border-2 bg-transparent text-white border-indigo-500 outline-none focus:border-white;
 }
 .form-button {
 	@apply rounded-md bg-indigo-600 px-3.5 py-2.5 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
