@@ -414,14 +414,6 @@
 					>
 						Dokončit a odeslat
 					</button>
-					<button
-						type="button"
-						@click="$reset"
-						v-if="getShowSummaryValue"
-						class="form-button"
-					>
-						Začít znovu
-					</button>
 				</div>
 			</template>
 		</Form>
@@ -442,18 +434,16 @@ import {
 // Import form store
 import { useFormStore } from "@/stores/form";
 
-// Pick totalSteps, getActiveStepIndex, formData, getFormData, fetchFormData, getFormDataSummary, getShowSummaryValue, $reset and prevStep/NextStep functions from form store
+// Pick totalSteps, getActiveStepIndex, getFormData, fetchFormData, getFormDataSummary, getShowSummaryValue and prevStep/NextStep functions from form store
 const {
 	totalSteps,
 	getActiveStepIndex,
-	formData,
 	getFormData,
 	prevStep,
 	nextStep,
 	getFormDataSummary,
 	getShowSummaryValue,
 	fetchFormData,
-	$reset,
 } = useFormStore();
 
 // Regex helpers
@@ -546,7 +536,7 @@ const rules = computed(() => {
 	};
 });
 
-const v$ = useVuelidate(rules, formData);
+const v$ = useVuelidate(rules, getFormData);
 
 // Validate current step. If current step is valid, call nextStep() and move to the next step
 const validateStep = (step: number) => {
@@ -564,13 +554,7 @@ const submitForm = async () => {
 	if (v$.value.$invalid) {
 		return;
 	} else {
-		const finalFormData = {
-			...formData.step1,
-			...formData.step2,
-			...formData.step3,
-			...formData.step4,
-		};
-		fetchFormData(finalFormData);
+		fetchFormData();
 	}
 };
 </script>

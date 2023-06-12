@@ -73,6 +73,9 @@ export const useFormStore = defineStore('form', () => {
     // Active step
     const activeStepIndex = ref(1)
 
+    // Get current active index
+    const getActiveStepIndex = computed(() => activeStepIndex)
+
     // Next step
     const nextStep = () => {
         if (activeStepIndex.value < totalSteps) {
@@ -92,9 +95,6 @@ export const useFormStore = defineStore('form', () => {
         }
     };
 
-    // Get current active index
-    const getActiveStepIndex = computed(() => activeStepIndex)
-
     // Form data
     const formData = ref<FormData>(defaultFormData)
 
@@ -104,6 +104,7 @@ export const useFormStore = defineStore('form', () => {
     // Summarized form data
     const formDataSummary = ref<SummarizedData>(defaultSummarizedData)
 
+    // Get summarized form data
     const getFormDataSummary = computed(() => formDataSummary)
 
     // Summary of sent form data
@@ -113,7 +114,14 @@ export const useFormStore = defineStore('form', () => {
     const getShowSummaryValue = computed(() => showSummary)
 
     // Send form data to API, get response of data back
-    const fetchFormData = async (finalFormData: SummarizedData) => {
+    const fetchFormData = async () => {
+        const finalFormData = {
+            ...formData.value.step2,
+            ...formData.value.step3,
+            ...formData.value.step4,
+            ...formData.value.step1,
+        };
+
         const { data, error } = await useCustomFetch<{}>(
             "/posts",
             "POST",
@@ -130,13 +138,5 @@ export const useFormStore = defineStore('form', () => {
         }
     }
 
-    // Reset form to default values
-    const $reset = () => {
-        formData.value = defaultFormData
-        formDataSummary.value = defaultSummarizedData
-        showSummary.value = false
-        activeStepIndex.value = 1
-    }
-
-    return { formData, getFormData, fetchFormData, formDataSummary, totalSteps, nextStep, prevStep, getActiveStepIndex, showSummary, getShowSummaryValue, getFormDataSummary, $reset }
+    return { formData, getFormData, fetchFormData, formDataSummary, totalSteps, nextStep, prevStep, getActiveStepIndex, showSummary, getShowSummaryValue, getFormDataSummary }
 })
